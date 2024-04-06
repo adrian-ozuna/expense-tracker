@@ -32,14 +32,14 @@ export const AddTransaction = ({ onAdd }: Props) => {
 
     return (
         <>
-            <form className='flex flex-col' onSubmit={onSubmit}>
+            <form className='flex flex-col gap-2' onSubmit={onSubmit}>
                 <label htmlFor="text">Text</label>
-                <input type="text" className='p-3' name='text' id='text' placeholder='Enter text...' value={text} onChange={(e) => setText(e.target.value)} />
+                <input type="text" className='p-3 rounded' name='text' id='text' placeholder='Enter text...' value={text} onChange={(e) => setText(e.target.value)} />
 
                 <label htmlFor="amount">Amount (use a negative sign for expenses)</label>
-                <input type="text" className='p-3' name='amount' id='amount' placeholder='Enter amount...' value={amount} onChange={(e) => setAmount(e.target.value)} />
+                <input type="text" className='p-3 rounded' name='amount' id='amount' placeholder='Enter amount...' value={amount} onChange={(e) => setAmount(e.target.value)} />
 
-                <input type="submit" className='p-4 bg-red-500 mt-4' value='Add transaction' />
+                <input type="submit" className='p-4 rounded bg-red-500 hover:bg-red-600 mt-4 transition duration-150 ease-in-out' value='Add transaction' />
             </form>
         </>
     )

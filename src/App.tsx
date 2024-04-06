@@ -3,6 +3,7 @@ import './App.css'
 import { TransactionType } from './types/TransactionType'
 import { AddTransaction } from './components/addTransaction'
 import { TransactionElement } from './components/TransactionElement'
+import { Divider } from './components/divider'
 
 export const TransactionContext = createContext(0);
 
@@ -40,29 +41,37 @@ function App() {
 
   return (
     <TransactionContext.Provider value={transactions.length}>
-      <div className="flex justify-center items-center">
-        <div className="flex flex-col">
-          <h1 className='font-bold text-4xl text-center mb-6'>Expense Tracker</h1>
-          <div className="flex flex-col">
-            <p>Your balance</p>
-            <p>${income + expense}</p>
-          </div>
-          <div className="flex flex-row bg-white w-full gap-8 text-center justify-center p-4">
+      <main>
+        <div className="flex justify-center items-center">
+          <div className="flex flex-col gap-2">
+            <header>
+              <h1 className='font-bold text-4xl text-center mb-6'>Expense Tracker</h1>
+            </header>
             <div className="flex flex-col">
-              <p>Income</p>
-              <p className='text-green-500'>${income}</p>
+              <p className='text-xl'>Your balance</p>
+              <p className='text-4xl'>${income + expense}</p>
             </div>
-            <div className="flex flex-col">
-              <p>Expense</p>
-              <p className='text-red-500'>${expense}</p>
+            <div className="flex flex-row bg-white w-full gap-8 text-center justify-center p-4 rounded">
+              <div className="flex flex-col">
+                <p className='font-bold'>Income</p>
+                <p className='text-green-500'>${income}</p>
+              </div>
+              <div className="flex flex-col">
+                <p className='font-bold'>Expense</p>
+                <p className='text-red-500'>${expense}</p>
+              </div>
             </div>
+            <Divider/>
+            <h2 className='text-xl'>History</h2>
+            <Divider />
+            <div className="flex flex-col divide-y">
+              {transactions.map(transaction => <TransactionElement transaction={transaction} onDelete={onDelete} key={transaction.id} />)}
+            </div>
+            <h2 className='text-xl'>Add new transaction</h2>
+            <AddTransaction onAdd={onAdd} />
           </div>
-          <h2>History</h2>
-          {transactions.map(transaction => <TransactionElement transaction={transaction} onDelete={onDelete} key={transaction.id} />)}
-          <h2>Add new transaction</h2>
-          <AddTransaction onAdd={onAdd} />
         </div>
-      </div>
+      </main>
     </TransactionContext.Provider>
   )
 }
